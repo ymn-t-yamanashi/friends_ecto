@@ -6,5 +6,6 @@ defmodule Sample.Test do
 
   defp main do
     person = %Friends.Person{}
+    person = %Friends.Person{age: 28}
   end
 end
