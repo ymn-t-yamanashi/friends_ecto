@@ -9,6 +9,7 @@ defmodule Sample.Test do
     # person = %Friends.Person{age: 28}
     # person = %{person | age: 28}
     # person.age
-    Friends.Repo.insert(person)
+    changeset = Friends.Person.changeset(person, %{})
+    Friends.Repo.insert(changeset)
   end
 end
