@@ -9,3 +9,6 @@ format:
 
 clean:
 	docker compose run --rm elixir mix clean
+
+run:
+	docker compose run --rm elixir mix run --eval "Sample.Test.run()" 
