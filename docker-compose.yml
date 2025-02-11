@@ -14,6 +14,15 @@ services:
       - .:/work
     working_dir: /work
     command: "/bin/sh"
+  pgadmin4:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "ttt@t.t"
+      PGADMIN_DEFAULT_PASSWORD: "ttt"
+    ports:
+      - 7778:80
+    links:
+      - db
   db:
     image: postgres:15.3-alpine
     environment:
@@ -22,5 +31,6 @@ services:
       - 5432:5432
     volumes:
       - dbdata:/var/lib/postgresql/data
+
 volumes:
   dbdata:
