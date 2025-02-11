@@ -1,7 +1,9 @@
 version: '3'
 services:
   elixir:
-    image: elixir:1.17.3
+    build:
+      context: .
+      dockerfile: Dockerfile
     environment:
       DB_HOST: db
     links:
