@@ -1,5 +1,13 @@
 version: '3'
 services:
+  db:
+    image: postgres:15.3-alpine
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - dbdata:/var/lib/postgresql/data
   elixir:
     build:
       context: .
@@ -14,23 +22,23 @@ services:
       - .:/work
     working_dir: /work
     command: "/bin/sh"
+    depends_on:
+      - db
   pgadmin4:
     image: dpage/pgadmin4
+    volumes:
+        - pgadmin4data:/var/lib/pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: "ttt@t.t"
       PGADMIN_DEFAULT_PASSWORD: "ttt"
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
     ports:
       - 7778:80
     links:
       - db
-  db:
-    image: postgres:15.3-alpine
-    environment:
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - 5432:5432
-    volumes:
-      - dbdata:/var/lib/postgresql/data
-
+    depends_on:
+      - db
 volumes:
   dbdata:
+  pgadmin4data:
