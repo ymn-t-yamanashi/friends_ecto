@@ -2,7 +2,7 @@ setup:
 	docker compose run --rm elixir mix do ecto.create ecto.migrate
 
 up:
-	docker compose run --rm elixir /bin/sh 
+	docker compose up 
 
 format:
 	docker compose run --rm elixir mix format
